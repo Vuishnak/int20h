@@ -10,7 +10,9 @@
         "vlucas/phpdotenv": "~2.2",
         "dingo/api": "1.0.x@dev",
         "laravelista/lumen-vendor-publish": "^2.0",
-        "tymon/jwt-auth": "1.0.0-beta.2@dev"
+        "tymon/jwt-auth": "1.0.0-beta.2@dev",
+        "predis/predis": "~1.0",
+        "illuminate/redis": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

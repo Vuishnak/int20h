@@ -33,4 +33,17 @@ class Post extends Model
      */
     protected $hidden = [];
 
+    /**
+     * @var array
+     */
+    protected $dates = ['time', 'created_at', 'updated_at'];
+
+    /**
+     * Метка времени добавления поста
+     */
+    public function setCreatedAtAttribute()
+    {
+        $this->attributes['created_at'] = date('Y-m-d H:i:s');
+    }
+
 }

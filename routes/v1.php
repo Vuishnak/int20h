@@ -12,7 +12,7 @@
 */
 
 $api->get('/', function () use ($api) {
-    return str_random(32);
+    return 'API';
 });
 
 $api->post('auth', [
@@ -23,6 +23,11 @@ $api->post('auth', [
 $api->post('posts/store', [
     'uses' => 'PostController@store',
     'as' => 'posts.store'
+]);
+
+$api->post('tags/store', [
+    'uses' => 'TagController@store',
+    'as' => 'tags.store'
 ]);
 
 $api->group([
