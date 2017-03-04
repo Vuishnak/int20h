@@ -20,15 +20,17 @@ $api->post('auth', [
     'as' => 'auth'
 ]);
 
-$api->post('posts/store', [
-    'uses' => 'PostController@store',
-    'as' => 'posts.store'
-]);
+$api->group(['middleware' => 'cors'], function ($api) {
+    $api->post('posts/store', [
+        'uses' => 'PostController@store',
+        'as' => 'posts.store'
+    ]);
 
-$api->post('tags/store', [
-    'uses' => 'TagController@store',
-    'as' => 'tags.store'
-]);
+    $api->post('tags/store', [
+        'uses' => 'TagController@store',
+        'as' => 'tags.store'
+    ]);
+});
 
 $api->group([
     'middleware' => 'jwt.auth',
@@ -83,11 +85,6 @@ $api->group([
 //            'as' => 'tags.store'
 //        ]);
 
-        $api->put('update', [
-            'uses' => 'TagController@update',
-            'as' => 'tags.update'
-        ]);
-
         $api->delete('delete', [
             'uses' => 'TagController@delete',
             'as' => 'tags.delete'
@@ -99,11 +96,6 @@ $api->group([
         $api->get('/', [
             'uses' => 'PostController@getPosts',
             'as' => 'posts.index'
-        ]);
-
-        $api->put('update', [
-            'uses' => 'PostController@update',
-            'as' => 'posts.update'
         ]);
 
         $api->delete('delete', [

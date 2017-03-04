@@ -67,34 +67,6 @@ class PostController extends Controller
     }
 
     /**
-     * Обновление тега
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, $id)
-    {
-        $data = $request->all();
-
-        DB::beginTransaction();
-        try {
-            $model = Post::find($id);
-            $model->fill($data)->save();
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json([
-                'message' => $e->getMessage(),
-                'code' => $e->getCode()
-            ], $e->getCode());
-        }
-
-        return response()->json([
-            'message' => 'Пост #' . $model->id . ' был успешно обновлен!',
-        ], 200);
-    }
-
-    /**
      * Удаление тега
      * @param $id
      * @return \Illuminate\Http\JsonResponse
