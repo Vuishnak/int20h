@@ -35,9 +35,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        return response()->json([
-            'data' => $data
-        ]);
         DB::beginTransaction();
         try {
             if (!isset($data['posts'])) {
