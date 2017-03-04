@@ -34,17 +34,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = json_decode($request->all());
         DB::beginTransaction();
         try {
-            if (!isset($data['posts'])) {
+            if (!isset($data->posts)) {
                 $model = Post::create($data);
                 return response()->json([
                     'message' => 'Пост #' . $model->id . ' был успешно добален!',
                 ], 200);
             } else {
-                $count = count($data['posts']);
-                Post::insert($data['posts']);
+                $count = count($data->posts);
+                Post::insert($data->posts);
                 return response()->json([
                     'message' => 'Добавлено ' . $count . ' постов!',
                 ], 200);
