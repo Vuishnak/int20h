@@ -20,14 +20,10 @@ $api->post('auth', [
     'as' => 'auth'
 ]);
 
-$api->group([
-    'middleware' => 'cors',
-], function ($api) {
-    $api->post('posts/store', [
-        'uses' => 'PostController@store',
-        'as' => 'posts.store'
-    ]);
-});
+$api->post('posts/store', [
+    'uses' => 'PostController@store',
+    'as' => 'posts.store'
+]);
 
 $api->group([
     'middleware' => 'jwt.auth',

@@ -37,25 +37,26 @@ class PostController extends Controller
         $data = $request->all();
         DB::beginTransaction();
         try {
-            if (!isset($data->posts)) {
+            if (!isset($data['posts'])) {
                 $model = Post::create($data);
+                DB::commit();
                 return response()->json([
                     'message' => 'Пост #' . $model->id . ' был успешно добален!',
                 ], 200);
             } else {
-                $count = count($data->posts);
-                Post::insert($data->posts);
+                $count = count($data['posts']);
+                Post::insert($data['posts']);
+                DB::commit();
                 return response()->json([
                     'message' => 'Добавлено ' . $count . ' постов!',
                 ], 200);
             }
-            DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json([
                 'message' => $e->getMessage(),
                 'code' => $e->getCode()
-            ], $e->getCode());
+            ], 500);
         }
     }
 
