@@ -44,11 +44,17 @@ class PostController extends Controller
                     'message' => 'Пост #' . $model->id . ' был успешно добален!',
                 ], 200);
             } else {
-                $count = count($data['posts']);
-                Post::insert($data['posts']);
-                DB::commit();
+                if (sizeof($data['posts']) > 0) {
+                    $count = count($data['posts']);
+                    Post::insert($data['posts']);
+                    DB::commit();
+                    return response()->json([
+                        'message' => 'Добавлено постов: ' . $count,
+                    ], 200);
+                }
+
                 return response()->json([
-                    'message' => 'Добавлено ' . $count . ' постов!',
+                    'message' => 'Нет записей!',
                 ], 200);
             }
         } catch (\Exception $e) {

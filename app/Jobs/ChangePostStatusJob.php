@@ -2,12 +2,10 @@
 
 namespace App\Jobs;
 
-class ExampleJob extends Job
+class ChangePostStatusJob extends Job
 {
     /**
      * Create a new job instance.
-     *
-     * @return void
      */
     public function __construct()
     {
