@@ -35,7 +35,6 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         DB::beginTransaction();
         try {
             $model = Tag::create($data);
