@@ -78,10 +78,10 @@ $api->group([
             'as' => 'tags.index'
         ]);
 
-        $api->post('store', [
-            'uses' => 'TagController@store',
-            'as' => 'tags.store'
-        ]);
+//        $api->post('store', [
+//            'uses' => 'TagController@store',
+//            'as' => 'tags.store'
+//        ]);
 
         $api->put('update', [
             'uses' => 'TagController@update',
