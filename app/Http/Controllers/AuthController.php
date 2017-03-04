@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Dingo\Api\Contract\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -37,7 +37,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
         return response()->json([
             'message' => 'Вы успешно вышли из аккаунта!',
         ], 200);

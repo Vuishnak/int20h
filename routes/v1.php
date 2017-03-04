@@ -21,9 +21,28 @@ $api->post('auth', [
 ]);
 
 $api->group([
-    'middleware' => 'auth',
+    'middleware' => 'cors',
 ], function ($api) {
-    $api->post('logout', [
+    $api->post('posts/store', [
+        'uses' => 'PostController@store',
+        'as' => 'posts.store'
+    ]);
+});
+
+$api->group([
+    'middleware' => 'jwt.auth',
+], function ($api) {
+    $api->get('user', [
+        'uses' => 'AuthController@getUser',
+        'as' => 'auth_user'
+    ]);
+
+    $api->post('settings', [
+        'uses' => 'ConfigController@update',
+        'as' => 'config'
+    ]);
+
+    $api->get('logout', [
         'uses' => 'AuthController@logout',
         'as' => 'logout'
     ]);
@@ -79,11 +98,6 @@ $api->group([
         $api->get('/', [
             'uses' => 'PostController@getPosts',
             'as' => 'posts.index'
-        ]);
-
-        $api->post('store', [
-            'uses' => 'PostController@store',
-            'as' => 'posts.store'
         ]);
 
         $api->put('update', [

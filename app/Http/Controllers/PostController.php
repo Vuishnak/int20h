@@ -35,10 +35,20 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         DB::beginTransaction();
         try {
-            $model = Post::create($data);
+            if (!isset($data['posts'])) {
+                $model = Post::create($data);
+                return response()->json([
+                    'message' => 'Пост #' . $model->id . ' был успешно добален!',
+                ], 200);
+            } else {
+                $count = count($data['posts']);
+                Post::insert($data['posts']);
+                return response()->json([
+                    'message' => 'Добавлено ' . $count . ' постов!',
+                ], 200);
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -47,10 +57,6 @@ class PostController extends Controller
                 'code' => $e->getCode()
             ], $e->getCode());
         }
-
-        return response()->json([
-            'message' => 'Пост #' . $model->id . ' был успешно добален!',
-        ], 200);
     }
 
     /**
