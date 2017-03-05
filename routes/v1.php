@@ -55,7 +55,7 @@ $api->group([
             'as' => 'users.update'
         ]);
 
-        $api->delete('delete/{id}', [
+        $api->post('delete/{id}', [
             'uses' => 'UserController@delete',
             'as' => 'users.delete'
         ]);
@@ -73,7 +73,7 @@ $api->group([
             'as' => 'tags.store'
         ]);
 
-        $api->delete('delete/{id}', [
+        $api->post('delete/{id}', [
             'uses' => 'TagController@delete',
             'as' => 'tags.delete'
         ]);
@@ -91,7 +91,7 @@ $api->group([
             'as' => 'posts.store'
         ]);
 
-        $api->delete('delete/{id}', [
+        $api->post('delete/{id}', [
             'uses' => 'PostController@delete',
             'as' => 'posts.delete'
         ]);
