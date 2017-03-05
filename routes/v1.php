@@ -21,7 +21,7 @@ $api->post('auth', [
 ]);
 
 $api->group([
-    'middleware' => ['jwt.auth', 'cors'],
+    'middleware' => ['cors'],
 ], function ($api) {
     $api->get('user', [
         'uses' => 'AuthController@getUser',
