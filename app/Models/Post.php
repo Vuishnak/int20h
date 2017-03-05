@@ -23,7 +23,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'text', 'user', 'network', 'likes', 'time', 'status',
+        'tag', 'user_id', 'text', 'user', 'network', 'likes', 'time', 'status',
     ];
 
     /**
