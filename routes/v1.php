@@ -20,20 +20,8 @@ $api->post('auth', [
     'as' => 'auth'
 ]);
 
-$api->group(['middleware' => 'cors'], function ($api) {
-    $api->post('posts/store', [
-        'uses' => 'PostController@store',
-        'as' => 'posts.store'
-    ]);
-
-    $api->post('tags/store', [
-        'uses' => 'TagController@store',
-        'as' => 'tags.store'
-    ]);
-});
-
 $api->group([
-    'middleware' => 'jwt.auth',
+    'middleware' => ['jwt.auth', 'cors'],
 ], function ($api) {
     $api->get('user', [
         'uses' => 'AuthController@getUser',
@@ -80,10 +68,10 @@ $api->group([
             'as' => 'tags.index'
         ]);
 
-//        $api->post('store', [
-//            'uses' => 'TagController@store',
-//            'as' => 'tags.store'
-//        ]);
+        $api->post('store', [
+            'uses' => 'TagController@store',
+            'as' => 'tags.store'
+        ]);
 
         $api->delete('delete', [
             'uses' => 'TagController@delete',
@@ -96,6 +84,11 @@ $api->group([
         $api->get('/', [
             'uses' => 'PostController@getPosts',
             'as' => 'posts.index'
+        ]);
+
+        $api->post('store', [
+            'uses' => 'PostController@store',
+            'as' => 'posts.store'
         ]);
 
         $api->delete('delete', [
